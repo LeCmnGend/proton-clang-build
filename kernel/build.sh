@@ -173,54 +173,57 @@ function build_kernels() {
     for TARGET in "${TARGETS[@]}"; do
         case ${TARGET} in
             "arm-linux-gnueabi")
-                time \
-                    "${MAKE[@]}" \
-                    ARCH=arm \
-                    CROSS_COMPILE="${TARGET}-" \
-                    KCONFIG_ALLCONFIG=<(echo CONFIG_CPU_BIG_ENDIAN=n) \
-                    distclean "${CONFIG_TARGET}" zImage modules || exit ${?}
+                case ${CONFIG_TARGET} in
+                    defconfig)
+                        CONFIGS=(multi_v5_defconfig aspeed_g5_defconfig multi_v7_defconfig)
+                        ;;
+                    *)
+                        CONFIGS=("${CONFIG_TARGET}")
+                        ;;
+                esac
+                for CONFIG in "${CONFIGS[@]}"; do
+                    time "${MAKE[@]}" \
+                        ARCH=arm \
+                        CROSS_COMPILE="${TARGET}-" \
+                        KCONFIG_ALLCONFIG=<(echo CONFIG_CPU_BIG_ENDIAN=n) \
+                        distclean "${CONFIG}" all || exit ${?}
+                done
                 ;;
             "aarch64-linux-gnu")
-                time \
-                    "${MAKE[@]}" \
+                time "${MAKE[@]}" \
                     ARCH=arm64 \
                     CROSS_COMPILE="${TARGET}-" \
                     KCONFIG_ALLCONFIG=<(echo CONFIG_CPU_BIG_ENDIAN=n) \
                     distclean "${CONFIG_TARGET}" Image.gz modules || exit ${?}
                 ;;
             "hexagon-linux-gnu")
-                time \
-                    "${MAKE[@]}" \
+                time "${MAKE[@]}" \
                     ARCH=hexagon \
                     CROSS_COMPILE="${TARGET}-" \
                     LLVM_IAS=1 \
                     distclean defconfig all || exit ${?}
                 ;;
             "mipsel-linux-gnu")
-                time \
-                    "${MAKE[@]}" \
+                time "${MAKE[@]}" \
                     ARCH=mips \
                     CROSS_COMPILE="${TARGET}-" \
                     distclean malta_defconfig vmlinux modules || exit ${?}
                 ;;
             "powerpc-linux-gnu")
-                time \
-                    "${MAKE[@]}" \
+                time "${MAKE[@]}" \
                     ARCH=powerpc \
                     CROSS_COMPILE="${TARGET}-" \
                     distclean ppc44x_defconfig zImage modules || exit ${?}
                 ;;
             "powerpc64-linux-gnu")
-                time \
-                    "${MAKE[@]}" \
+                time "${MAKE[@]}" \
                     ARCH=powerpc \
                     LD="${TARGET}-ld" \
                     CROSS_COMPILE="${TARGET}-" \
                     distclean pseries_defconfig disable-werror.config vmlinux modules || exit ${?}
                 ;;
             "powerpc64le-linux-gnu")
-                time \
-                    "${MAKE[@]}" \
+                time "${MAKE[@]}" \
                     ARCH=powerpc \
                     CROSS_COMPILE="${TARGET}-" \
                     distclean powernv_defconfig zImage.epapr modules || exit ${?}
@@ -239,8 +242,7 @@ function build_kernels() {
                 time "${RISCV_MAKE[@]}" Image.gz modules || exit ${?}
                 ;;
             "s390x-linux-gnu")
-                time \
-                    "${MAKE[@]}" \
+                time "${MAKE[@]}" \
                     ARCH=s390 \
                     CROSS_COMPILE="${TARGET}-" \
                     LD="${TARGET}-ld" \
@@ -249,9 +251,8 @@ function build_kernels() {
                     distclean defconfig bzImage modules || exit ${?}
                 ;;
             "x86_64-linux-gnu")
-                time \
-                    "${MAKE[@]}" \
-                    distclean "${CONFIG_TARGET}" bzImage modules || exit ${?}
+                time "${MAKE[@]}" \
+                    distclean "${CONFIG_TARGET}" all || exit ${?}
                 ;;
         esac
     done
