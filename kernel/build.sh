@@ -186,7 +186,6 @@ function build_kernels() {
                     time "${MAKE[@]}" \
                         ARCH=arm \
                         CROSS_COMPILE="${TARGET}-" \
-                        KCONFIG_ALLCONFIG=<(echo CONFIG_CPU_BIG_ENDIAN=n) \
                         distclean "${CONFIG}" all || exit ${?}
                 done
                 ;;
@@ -194,8 +193,7 @@ function build_kernels() {
                 time "${MAKE[@]}" \
                     ARCH=arm64 \
                     CROSS_COMPILE="${TARGET}-" \
-                    KCONFIG_ALLCONFIG=<(echo CONFIG_CPU_BIG_ENDIAN=n) \
-                    distclean "${CONFIG_TARGET}" Image.gz modules || exit ${?}
+                    distclean "${CONFIG_TARGET}" all || exit ${?}
                 ;;
             "hexagon-linux-gnu")
                 time "${MAKE[@]}" \
