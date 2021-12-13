@@ -292,6 +292,7 @@ function build_kernels() {
                 ;;
             "x86_64-linux-gnu")
                 time "${MAKE[@]}" \
+                    ARCH=x86_64 \
                     distclean "${CONFIG_TARGET}" all || exit ${?}
                 ;;
         esac
