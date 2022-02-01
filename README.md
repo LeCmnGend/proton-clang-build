@@ -1,5 +1,9 @@
 # Toolchain build scripts
 
+## For noob friendly (like me) run build-toolchain.sh is all we need :-D
+
+Huge thank to kdrag0n
+
 There are times where a tip of tree LLVM build will have some issue fixed and it isn't available to you, maybe because it isn't in a release or it isn't available through your distribution's package management system. At that point, to get that fix, LLVM needs to be compiled, which sounds scary but is [rather simple](https://llvm.org/docs/GettingStarted.html). The `build-llvm.py` script takes it a step farther by trying to optimize both LLVM's build time by:
 
 * Trimming down a lot of things that kernel developers don't care about:
