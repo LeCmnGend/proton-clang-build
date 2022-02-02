@@ -39,7 +39,6 @@ msg "Setting library load paths for portability..."
 for bin in $(find install -mindepth 2 -maxdepth 3 -type f -exec file {} \; | grep 'ELF .* interpreter' | awk '{print $1}'); do
 	# Remove last character from file output (':')
 	bin="${bin: : -1}"
-
 	echo "$bin"
 	patchelf --set-rpath '$ORIGIN/../lib' "$bin"
 done
