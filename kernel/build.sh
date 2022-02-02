@@ -60,13 +60,6 @@ function set_default_values() {
     [[ -z ${TARGETS[*]} || ${TARGETS[*]} = "all" ]] && TARGETS=(
         "arm-linux-gnueabi"
         "aarch64-linux-gnu"
-        "hexagon-linux-gnu"
-        "mipsel-linux-gnu"
-        "powerpc-linux-gnu"
-        "powerpc64-linux-gnu"
-        "powerpc64le-linux-gnu"
-        "riscv64-linux-gnu"
-        "s390x-linux-gnu"
         "x86_64-linux-gnu"
     )
     [[ -z ${CONFIG_TARGET} ]] && CONFIG_TARGET=defconfig
@@ -214,7 +207,7 @@ function clang_supports_host_target() {
 }
 
 function build_kernels() {
-    MAKE_BASE=(make -skj"$(nproc)" KCFLAGS=-Wno-error LLVM=1 O=out)
+    MAKE_BASE=(make -skj11 KCFLAGS=-Wno-error LLVM=1 O=out)
 
     clang_supports_host_target || MAKE_BASE+=(HOSTCC=gcc HOSTCXX=g++)
 

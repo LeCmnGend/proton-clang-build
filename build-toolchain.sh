@@ -15,7 +15,7 @@ msg "Building LLVM..."
 ./build-llvm.py \
 	--clang-vendor "Proton" \
 	--targets "ARM;AArch64;X86" \
-	"$repo_flag" \
+	--no-update \
 	--pgo kernel-defconfig \
 	--lto full
 
