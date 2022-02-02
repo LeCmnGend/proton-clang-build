@@ -3,3 +3,5 @@
 *.pyc
 llvm-project/
 build/
+
+clang+llvm-*.tar.xz
