@@ -15,7 +15,7 @@ msg "Building LLVM..."
 ./build-llvm.py \
 	--clang-vendor "Proton" \
 	--targets "ARM;AArch64;X86" \
-	--no-update \
+	--repo_flag \
 	--pgo kernel-defconfig \
 	--lto full
 
@@ -24,9 +24,9 @@ msg "Building binutils..."
 ./build-binutils.py --targets arm aarch64 x86_64
 
 # Remove unused products
-msg "Removing unused products..."
-rm -fr install/include
-rm -f install/lib/*.a install/lib/*.la
+#msg "Removing unused products..."
+#rm -fr install/include
+#rm -f install/lib/*.a install/lib/*.la
 
 # Strip remaining products
 msg "Stripping remaining products..."
