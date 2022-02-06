@@ -207,7 +207,7 @@ function clang_supports_host_target() {
 }
 
 function build_kernels() {
-    MAKE_BASE=(make -skj11 KCFLAGS=-Wno-error LLVM=1 O=out)
+    MAKE_BASE=(make -skj7 KCFLAGS=-Wno-error LLVM=1 O=out)
 
     clang_supports_host_target || MAKE_BASE+=(HOSTCC=gcc HOSTCXX=g++)
 
@@ -227,7 +227,7 @@ function build_kernels() {
             "arm-linux-gnueabi")
                 case ${CONFIG_TARGET} in
                     defconfig)
-                        CONFIGS=(multi_v5_defconfig aspeed_g5_defconfig multi_v7_defconfig)
+                        CONFIGS=(multi_v7_defconfig)
                         ;;
                     *)
                         CONFIGS=("${CONFIG_TARGET}")
