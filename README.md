@@ -1,6 +1,8 @@
 # Toolchain build scripts
 
 ## For noob friendly (like me) run build-toolchain.sh is all we need :-D
+## The toolchain is in install folder. 
+Move it to anywhere you want
 
 Huge thank to kdrag0n
 
