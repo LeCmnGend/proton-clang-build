@@ -25,7 +25,7 @@ These scripts have been tested in a Docker image of the following distributions 
 * ### Debian/Ubuntu
 
   ```
-  apt install bc \
+ sudo aptitude install bc \
               binutils-dev \
               bison \
               build-essential \
