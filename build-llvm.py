@@ -1053,7 +1053,7 @@ def invoke_cmake(args, dirs, env_vars, stage):
     :return:
     """
     # Add the defines, point them to our build folder, and invoke cmake
-    cmake = ['cmake', '-G', 'Ninja', '-Wno-dev','-DLLVM_PARALLEL_LINK_JOBS=2','-DCMAKE_BUILD_TYPE=Release','-Wl,--reduce-memory-overheads','-fuse-ld=lld']
+    cmake = ['cmake', '-G', 'Ninja', '-Wno-dev','-DLLVM_PARALLEL_LINK_JOBS=3','-DCMAKE_BUILD_TYPE=Release','-fuse-ld=lld']
     defines = build_cmake_defines(args, dirs, env_vars, stage)
     for key in defines:
         newdef = '-D' + key + '=' + defines[key]
