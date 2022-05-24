@@ -102,7 +102,7 @@ function setup_krnl_src() {
     if [[ -n ${SRC_FOLDER} ]]; then
         cd "${SRC_FOLDER}" || exit 1
     else
-        LINUX=linux-5.17
+        LINUX=linux-5.18
         LINUX_TARBALL=${KRNL}/${LINUX}.tar.xz
 
         # If we don't have the source tarball, download and verify it
