@@ -13,11 +13,12 @@ function msg() {
 # Build LLVM
 msg "Building LLVM..."
 ./build-llvm.py \
-	--clang-vendor "Proton" \
-	--targets "ARM;AArch64;X86" \
+    --branch "release/16.x" \
+    --check-targets clang lld llvm \
 	"$repo_flag" \
-	--pgo kernel-defconfig \
-	--lto full
+    --clang-vendor "Proton" \
+    --projects "clang;lld" \
+    --targets "ARM;AArch64;X86"
 
 # Build binutils
 msg "Building binutils..."
